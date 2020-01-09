@@ -1,0 +1,15 @@
+version: "3.5"
+
+services:
+
+    mariadb:
+      image: mariadb:latest
+
+    core:
+      image: laravel-vpn-admin/api-core:latest
+
+    openvpn:
+      image: laravel-vpn-admin/docker-openvpn:latest
+
+    l2tp:
+      image: laravel-vpn-admin/docker-l2tp:latest
