@@ -25,7 +25,7 @@
 ## Contributors
 ### Back-end 
 * [EvilFreelancer](https://github.com/EvilFreelancer)
-* [Nejc aka SilverEngine](https://github.com/SilverEngineTeam)
+* [Nejc a.k.a SilverEngine](https://github.com/SilverEngineTeam)
 * [Dinozor](https://github.com/Dinozor)
 ### Front-end
 * [Faqqy](https://github.com/Faqqy)
