@@ -1,5 +1,9 @@
 # Laravel VPN Admin
 
+
+![Licence](https://img.shields.io/badge/Licence-MIT-green.svg)
+![version Alpha](https://img.shields.io/badge/Alpha-V1.0.0-yellow.svg)
+
 <img src="./schema.jpg">
 
 ## Software Stack
