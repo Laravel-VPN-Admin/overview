@@ -2,14 +2,39 @@ version: "3.5"
 
 services:
 
-    mariadb:
-      image: mariadb:latest
+  core:
+    image: evilfreelancer/dockavel:latest-xdebug
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+    - ../api-core:/app
 
-    core:
-      image: laravel-vpn-admin/api-core:latest
+#    openvpn:
+#      image: laravel-vpn-admin/docker-openvpn:latest
 
-    openvpn:
-      image: laravel-vpn-admin/docker-openvpn:latest
+#    l2tp:
+#      image: laravel-vpn-admin/docker-l2tp:latest
 
-    l2tp:
-      image: laravel-vpn-admin/docker-l2tp:latest
+  mardiadb:
+    restart: unless-stopped
+    image: mariadb:10
+    ports:
+      - 127.0.0.1:3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootroot
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: test_user
+      MYSQL_PASSWORD: test_pass
+    volumes:
+      - ./databases/mariadb:/var/lib/mysql
+
+  phpmyadmin:
+    restart: unless-stopped
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 127.0.0.1:8080:8080
+    environment:
+      PMA_HOST: mardiadb
+      PMA_USER: test_user
+      PMA_PASSWORD: test_pass
