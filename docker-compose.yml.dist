@@ -3,12 +3,37 @@ version: "3.5"
 services:
 
   core:
-    image: evilfreelancer/dockavel:latest-xdebug
+    image: laravelvpnadmin/api-core
     restart: unless-stopped
     ports:
-      - 80:80
+    - 80:80
     volumes:
-    - ../api-core:/app
+    - ./logs/api-core:/var/log/apache2
+    - ./sites/api-core/storage:/app/storage
+    - ./sites/api-core/bootstrap/cache:/app/bootstrap/cache
+#    - ../api-core:/app
+
+  queue:
+    image: laravelvpnadmin/api-core
+    restart: unless-stopped
+    environment:
+    - CONTAINER_ROLE=queue
+    volumes:
+    - ./logs/api-core:/var/log/apache2
+    - ./sites/api-core/storage:/app/storage
+    - ./sites/api-core/bootstrap/cache:/app/bootstrap/cache
+#    - ../api-core:/app
+
+  scheduler:
+    image: laravelvpnadmin/api-core
+    restart: unless-stopped
+    environment:
+    - CONTAINER_ROLE=scheduler
+    volumes:
+    - ./logs/api-core:/var/log/apache2
+    - ./sites/api-core/storage:/app/storage
+    - ./sites/api-core/bootstrap/cache:/app/bootstrap/cache
+#    - ../api-core:/app
 
 #    openvpn:
 #      image: laravel-vpn-admin/docker-openvpn:latest
@@ -16,7 +41,7 @@ services:
 #    l2tp:
 #      image: laravel-vpn-admin/docker-l2tp:latest
 
-  mardiadb:
+  mariadb:
     restart: unless-stopped
     image: mariadb:10
     ports:
