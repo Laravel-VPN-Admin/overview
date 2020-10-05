@@ -1,4 +1,4 @@
-version: "3.5"
+version: "2.4"
 
 services:
 
@@ -36,12 +36,6 @@ services:
     - ./sites/api-core/storage:/app/storage
     - ./sites/api-core/bootstrap/cache:/app/bootstrap/cache
 #    - ../api-core:/app
-
-#    openvpn:
-#      image: laravel-vpn-admin/docker-openvpn:latest
-
-#    l2tp:
-#      image: laravel-vpn-admin/docker-l2tp:latest
 
   mariadb:
     restart: unless-stopped
