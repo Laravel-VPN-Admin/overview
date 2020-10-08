@@ -12,6 +12,10 @@ services:
     - ./sites/api-core/storage:/app/storage
     - ./sites/api-core/bootstrap/cache:/app/bootstrap/cache
 #    - ../api-core:/app
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
 
   queue:
     image: laravelvpnadmin/api-core
@@ -24,6 +28,10 @@ services:
     - ./sites/api-core/storage:/app/storage
     - ./sites/api-core/bootstrap/cache:/app/bootstrap/cache
 #    - ../api-core:/app
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
 
   scheduler:
     image: laravelvpnadmin/api-core
@@ -36,6 +44,22 @@ services:
     - ./sites/api-core/storage:/app/storage
     - ./sites/api-core/bootstrap/cache:/app/bootstrap/cache
 #    - ../api-core:/app
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+
+  redis:
+    restart: unless-stopped
+    image: redis:5
+    ports:
+    - 127.0.0.1:6379:6379
+    volumes:
+    - ./databases/redis:/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
 
   mariadb:
     restart: unless-stopped
@@ -43,12 +67,17 @@ services:
     ports:
       - 127.0.0.1:3306:3306
     environment:
+      MYSQL_ROOT_HOST: "%"
       MYSQL_ROOT_PASSWORD: rootroot
       MYSQL_DATABASE: vpnadmin
       MYSQL_USER: vpnadmin_user
       MYSQL_PASSWORD: vpnadmin_pass
     volumes:
       - ./databases/mariadb:/var/lib/mysql
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
 
   phpmyadmin:
     restart: unless-stopped
@@ -59,3 +88,7 @@ services:
       PMA_HOST: mariadb
       PMA_USER: root
       PMA_PASSWORD: rootroot
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
